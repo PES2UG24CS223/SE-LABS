@@ -1,16 +1,23 @@
-# Lab 5: Static Code Analysis � Issues and Fixes
+﻿# Static Code Analysis – Issues Identified
 
-| Issue | Type | Original Code | Fix Applied |
-|---|---|---|---|
-| Hardcoded moderator password | Security | `MODERATOR_PASSWORD = "reviews-demo"` | Read the password from the `MODERATOR_PASSWORD` environment variable. |
-| Binding to all network interfaces | Security / Configuration | `STREAM_HOST = "0.0.0.0"` | Changed the host to `127.0.0.1` to restrict the configured address to localhost. |
-| Weak hash algorithm | Security | `hashlib.md5(...)` | Replaced MD5 with SHA-256 for generating review identifiers. |
-| Missing movie and rating validation | Reliability | `rateMovie()` did not verify that the movie existed or that the rating was an integer from 1 to 5. | Added movie-existence checks and rating-type and range validation. |
-| Missing movie input validation | Reliability | `addMovie()` accepted empty titles and genres and invalid release years. | Added checks for non-empty titles and genres and a valid integer release year. |
-| Unsafe empty collection handling | Reliability | `pickFeatured()` called `random.choice()` even when no movies existed. | Return `None` when the movie collection is empty. |
+**Project:** Movie Reviews  
+**File Analyzed:** `movie_reviews.py`
 
-## Final Static Analysis Results
+## Issues Identified
 
-- Pylint: 10.00/10.
-- Bandit: No issues identified.
-- Flake8: No violations reported.
+| No. | Issue | Description | Recommended Fix |
+|---:|---|---|---|
+| 1 | Hardcoded Moderator Password | The moderator password was stored directly in the source code. | Read the password from an environment variable. |
+| 2 | Unsafe Network Binding | The application was configured to listen on `0.0.0.0`, exposing it to all network interfaces. | Bind to `127.0.0.1` when local access is sufficient. |
+| 3 | Weak Hashing Algorithm | MD5 was used to generate review identifiers. | Use SHA-256 for stronger hashing. |
+| 4 | Insecure Random Selection | The standard `random` module was used for random selection. | Use `secrets` where security-sensitive randomness is required. |
+| 5 | Missing Input Validation | User-provided review data was not adequately validated. | Validate and reject invalid input before processing. |
+| 6 | Missing Empty-Collection Handling | Selecting a featured movie could fail if the movie collection was empty. | Check that the collection contains items before selecting one. |
+| 7 | Inconsistent Naming Convention | CamelCase function names reduced consistency with Python naming conventions. | Use snake_case for function and variable names. |
+| 8 | Missing Documentation | Functions and modules lacked sufficient explanatory docstrings. | Add docstrings describing purpose, arguments, and return values. |
+| 9 | Code Formatting Issues | Inconsistent formatting and style could reduce readability. | Apply PEP 8 conventions and run Flake8. |
+| 10 | Maintainability Improvements | Shared or global state for featured content could make behavior harder to manage. | Keep state controlled and handle featured content explicitly. |
+
+## Summary
+
+The code review identified security, validation, readability, and maintainability concerns. The recommended fixes improve code quality and reduce potential risks. The final implementation should be verified using Pylint, Bandit, and Flake8.
