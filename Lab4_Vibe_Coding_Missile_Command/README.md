@@ -89,7 +89,7 @@ Submission is only the following three things:
 - [] A 10-second video of gameplay **after** your changes, showing the bug fixed and the new features working
 - [] The Chat/LLM used page link, with the complete chat history
 
-## Lab 4: Vibe Coding – Missile Command
+## Lab 4: Vibe Coding   Missile Command
 
 **Repository:** [33_missileCommand](https://github.com/PES2UG24CS223/33_missileCommand)
 
@@ -99,4 +99,11 @@ Submission is only the following three things:
 - Tested the updated game.
 
 ### Main File
-- game.py – Missile Command game implementation.
+- game.py   Missile Command game implementation.
+
+
+### Submission Evidence
+
+- **LLM conversation and chat history:** https://chatgpt.com/share/6ac5f81d-26b8-83e8-9015-1f32eb3ef62d
+- **Before gameplay video:** [before_gameplay.mp4](before_gameplay.mp4)
+- **After gameplay video:** [after_gameplay.mp4](after_gameplay.mp4)
